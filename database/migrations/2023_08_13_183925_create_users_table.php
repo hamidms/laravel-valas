@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->string('alamat');
-            $table->string('role');
             $table->unsignedBigInteger('membership_id');
             $table->foreign('membership_id')->references('id')->on('memberships');
             $table->timestamps();

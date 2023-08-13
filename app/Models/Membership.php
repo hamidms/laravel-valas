@@ -12,6 +12,4 @@ class Membership extends Model
     protected $table = 'memberships';
 
     protected $fillable = ['nama', 'discount', 'minimum_profit'];
-
-
 }
