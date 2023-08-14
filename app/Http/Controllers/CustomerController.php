@@ -79,4 +79,16 @@ class CustomerController extends Controller
     
         return redirect()->route('customer')->with('success', 'User updated successfully');
     }
+
+    public function delete($user_id) {
+        $user = User::find($user_id);
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found');
+        }
+
+        $user->delete();
+
+        return redirect()->route('customer')->with('success', 'User deleted successfully');
+    }
 }

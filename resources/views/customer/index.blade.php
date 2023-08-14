@@ -41,7 +41,11 @@
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                   <a href="/customer/{{ $user->id }}/edit" class="btn btn-outline-warning">Edit</a>
-                                  <a href="/customer/{{ $user->id }}/delete" class="btn btn-outline-danger">Delete</a>
+                                  <form action="/customer/{{ $user->id }}/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                </form>
                                 </div>
                             </td>
                         </tr>

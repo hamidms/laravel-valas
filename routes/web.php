@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth', 'check.membership:1,2']], function () {
     Route::post('customer/store', [CustomerController::class, 'store'])->name('customer.store');
     Route::get('/customer/{user_id}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
     Route::post('customer/{user_id}/update', [CustomerController::class, 'update'])->name('customer.update');
+    Route::delete('customer/{user_id}/delete', [CustomerController::class, 'delete'])->name('customer.delete');
 });
 
 Route::group(['middleware' => ['auth', 'check.membership:3,4,5']], function () {
