@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\MembershipController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,14 @@ Route::group(['middleware' => ['auth', 'check.membership:1,2']], function () {
     Route::get('/customer/{user_id}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
     Route::post('customer/{user_id}/update', [CustomerController::class, 'update'])->name('customer.update');
     Route::delete('customer/{user_id}/delete', [CustomerController::class, 'delete'])->name('customer.delete');
+
+    // Customer Management
+    Route::get('/membership', [MembershipController::class, 'index'])->name('membership');
+    Route::get('/membership/add', [MembershipController::class, 'create'])->name('membership.create');
+    Route::post('membership/store', [MembershipController::class, 'store'])->name('membership.store');
+    Route::get('/membership/{membership_id}/edit', [MembershipController::class, 'edit'])->name('membership.edit');
+    Route::post('membership/{membership_id}/update', [MembershipController::class, 'update'])->name('membership.update');
+    Route::delete('membership/{membership_id}/delete', [MembershipController::class, 'delete'])->name('membership.delete');
 });
 
 Route::group(['middleware' => ['auth', 'check.membership:3,4,5']], function () {
