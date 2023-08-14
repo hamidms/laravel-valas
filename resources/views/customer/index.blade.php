@@ -40,8 +40,8 @@
                             <td>{{ $user->membership->nama }}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                    <button type="button" class="btn btn-outline-warning">Edit</button>
-                                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                                  <a href="/customer/{{ $user->id }}/edit" class="btn btn-outline-warning">Edit</a>
+                                  <a href="/customer/{{ $user->id }}/delete" class="btn btn-outline-danger">Delete</a>
                                 </div>
                             </td>
                         </tr>
