@@ -30,9 +30,12 @@ class ValasController extends Controller
         $valas = Valas::where('nama', $valas_name)->get();
         $valas_nilai_jual = Valas::where('nama', $valas_name)->pluck('nilai_jual');
         $valas_tanggal_rate = Valas::where('nama', $valas_name)->pluck('tanggal_rate');
+        $nilai_jual_tertinggi = Valas::where('nama', $valas_name)->max('nilai_jual');
+        $nilai_jual_terendah = Valas::where('nama', $valas_name)->min('nilai_jual');
 
-        // return $valas;
-        return view('valas.detail', compact(['valas', 'valas_nilai_jual', 'valas_tanggal_rate']));
+
+        // return $nilai_jual_terendah;
+        return view('valas.detail', compact(['valas', 'valas_nilai_jual', 'valas_tanggal_rate','nilai_jual_tertinggi','nilai_jual_terendah']));
     }
 
     public function create() {
