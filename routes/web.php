@@ -65,6 +65,8 @@ Route::group(['middleware' => ['auth', 'check.membership:3,4,5']], function () {
     // Transaksi 
     Route::get('/valas/dashboard', [ValasController::class, 'dashboard'])->name('valas.dashboard');
     Route::get('/transaction/buy', [TransactionController::class, 'buy'])->name('transaction.buy');
+    Route::get('/transaction/sell', [TransactionController::class, 'sell'])->name('transaction.sell');
+    Route::post('/transaction/sell/{transaction_id}', [TransactionController::class, 'sold'])->name('transaction.sold');
     Route::get('/transaction/checkout', [TransactionController::class, 'checkout'])->name('transaction.checkout');
     Route::post('/transaction/payment', [TransactionController::class, 'payment'])->name('transaction.payment');
     

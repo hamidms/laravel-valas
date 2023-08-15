@@ -7,6 +7,7 @@ use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -68,5 +69,24 @@ class TransactionController extends Controller
         $transaction_detail->save();
 
         return redirect()->route('valas.dashboard')->with('success', 'Transaksi berhasil.');
+    }
+
+    public function sell() {
+        $transactions = TransactionDetail::where('user_id', Auth::user()->id)->with(['user', 'transaction', 'valas'])->where('type', 'buy')->get();
+        
+        $valas = DB::table('laravel_valas.valas')
+        ->select('valas.id', 'valas.nama', 'valas.nilai_jual', 'valas.nilai_beli', 'subquery.tanggal_rate')
+        ->joinSub(function ($query) {
+            $query->from('laravel_valas.valas')
+                ->select('nama', DB::raw('MAX(tanggal_rate) AS tanggal_rate'))
+                ->groupBy('nama');
+        }, 'subquery', function ($join) {
+            $join->on('valas.nama', '=', 'subquery.nama')
+                ->on('valas.tanggal_rate', '=', 'subquery.tanggal_rate');
+        })
+        ->orderBy('subquery.tanggal_rate', 'DESC')
+        ->get();
+
+        return view('valas.sell', compact('transactions'));
     }
 }
