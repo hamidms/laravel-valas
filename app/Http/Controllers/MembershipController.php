@@ -79,6 +79,6 @@ class MembershipController extends Controller
 
         $membership->delete();
 
-        return redirect()->route('customer')->with('success', 'Membership deleted successfully');
+        return redirect()->route('membership')->with('success', 'Membership deleted successfully');
     }
 }

@@ -32,6 +32,13 @@
           <span>Membership</span>
         </a>
       </li><!-- End Membership Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/valas">
+          <i class="bi bi-currency-exchange"></i>
+          <span>Valas</span>
+        </a>
+      </li><!-- End Valas Nav -->
 
     </ul>
 
