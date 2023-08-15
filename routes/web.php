@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\ValasController;
 use App\Http\Controllers\TransactionController;
 
@@ -66,7 +67,8 @@ Route::group(['middleware' => ['auth', 'check.membership:3,4,5']], function () {
     Route::get('/transaction/buy', [TransactionController::class, 'buy'])->name('transaction.buy');
     Route::get('/transaction/checkout', [TransactionController::class, 'checkout'])->name('transaction.checkout');
     Route::post('/transaction/payment', [TransactionController::class, 'payment'])->name('transaction.payment');
-
-    // Portfolio
     
+    // Portfolio
+    Route::get('/portfolio', [PortofolioController::class, 'index'])->name('portfolio');
+
 });

@@ -22,4 +22,9 @@ class TransactionDetail extends Model
     {
         return $this->belongsTo(Valas::class, 'valas_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
