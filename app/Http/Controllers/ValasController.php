@@ -106,4 +106,22 @@ class ValasController extends Controller
 
         return redirect()->route('valas')->with('success', 'Valas deleted successfully');
     }
+
+    public function dashboard() {
+        $valas = DB::table('laravel_valas.valas')
+        ->select('valas.id', 'valas.nama', 'valas.nilai_jual', 'valas.nilai_beli', 'subquery.tanggal_rate')
+        ->joinSub(function ($query) {
+            $query->from('laravel_valas.valas')
+                ->select('nama', DB::raw('MAX(tanggal_rate) AS tanggal_rate'))
+                ->groupBy('nama');
+        }, 'subquery', function ($join) {
+            $join->on('valas.nama', '=', 'subquery.nama')
+                ->on('valas.tanggal_rate', '=', 'subquery.tanggal_rate');
+        })
+        ->orderBy('subquery.tanggal_rate', 'DESC')
+        ->get();
+    
+        return view('valas.dashboard', compact('valas'));
+    }
+
 }

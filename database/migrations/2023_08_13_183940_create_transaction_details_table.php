@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('qty');
             $table->foreign('transaksi_id')->references('id')->on('transactions');
             $table->foreign('valas_id')->references('id')->on('valas');
+            $table->foreign('user_id')->references('id')->on('user');
             $table->timestamps();
         });
     }

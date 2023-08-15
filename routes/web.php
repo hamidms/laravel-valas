@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\ValasController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,9 +55,18 @@ Route::group(['middleware' => ['auth', 'check.membership:1,2']], function () {
     Route::get('/valas/{valas_name}/detail', [ValasController::class, 'detail'])->name('valas.detail');
     Route::post('/valas/{valas_id}/update', [ValasController::class, 'update'])->name('valas.update');
     Route::delete('/valas/{valas_id}/delete', [ValasController::class, 'delete'])->name('valas.delete');
-
+    
 });
 
 Route::group(['middleware' => ['auth', 'check.membership:3,4,5']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('user.dashboard');
+
+    // Transaksi 
+    Route::get('/valas/dashboard', [ValasController::class, 'dashboard'])->name('valas.dashboard');
+    Route::get('/transaction/buy', [TransactionController::class, 'buy'])->name('transaction.buy');
+    Route::get('/transaction/checkout', [TransactionController::class, 'checkout'])->name('transaction.checkout');
+    Route::post('/transaction/payment', [TransactionController::class, 'payment'])->name('transaction.payment');
+
+    // Portfolio
+    
 });
