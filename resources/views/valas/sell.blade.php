@@ -39,7 +39,10 @@
                               <td>{{ $transaction->rate }}</td>
                               <td>{{ $transaction->transaction->tgl_transaksi }}</td>
                               <td>
-                                <a href="/transaction/sell/{{ $transaction->id }}" class="btn btn-danger">Jual</a>
+                                <form action="/transaction/sell/{{ $transaction->id }}" method="POST" onsubmit="return confirm('Are you sure you want to sell this valas?')">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-danger">Jual</button>
+                                </form>
                               </td>
                           </tr>
                           @endforeach

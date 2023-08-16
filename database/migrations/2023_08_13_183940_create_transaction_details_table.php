@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('transaksi_id');
             $table->unsignedBigInteger('valas_id');
+            $table->unsignedBigInteger('user_id');
             $table->decimal('rate', 10, 2);
             $table->integer('qty');
+            $table->string('type');
             $table->foreign('transaksi_id')->references('id')->on('transactions');
             $table->foreign('valas_id')->references('id')->on('valas');
             $table->foreign('user_id')->references('id')->on('user');

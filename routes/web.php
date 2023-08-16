@@ -72,5 +72,7 @@ Route::group(['middleware' => ['auth', 'check.membership:3,4,5']], function () {
     
     // Portfolio
     Route::get('/portfolio', [PortofolioController::class, 'index'])->name('portfolio');
-
+    
+    // History
+    Route::get('/history', [TransactionController::class, 'history'])->name('transaction.history');
 });

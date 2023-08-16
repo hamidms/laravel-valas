@@ -66,6 +66,7 @@ class TransactionController extends Controller
         $transaction_detail->user_id = $request->user_id;
         $transaction_detail->rate = $request->rate;
         $transaction_detail->qty = $request->qty;
+        $transaction_detail->type = 'buy';
         $transaction_detail->save();
 
         return redirect()->route('valas.dashboard')->with('success', 'Transaksi berhasil.');
@@ -88,5 +89,20 @@ class TransactionController extends Controller
         ->get();
 
         return view('valas.sell', compact('transactions'));
+    }
+
+    public function sold($transaction_id) {
+        $transaction = TransactionDetail::find($transaction_id);
+        $transaction->type = 'sell';
+        $transaction->save();
+
+        // return $transaction;
+        return redirect()->route('transaction.sell')->with('success', 'Transaksi berhasil.');;
+    }
+
+    public function history() {
+        $transactions = TransactionDetail::where('user_id', Auth::user()->id)->with(['user', 'transaction', 'valas'])->orderBy('updated_at', 'desc')->get();
+
+        return view('transaction.history', compact('transactions'));
     }
 }

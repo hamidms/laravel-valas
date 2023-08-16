@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('no_transaksi');
             $table->string('nama_customer');
             $table->date('tgl_transaksi');
-            $table->decimal('discount', 5, 2)->default(0);
+            $table->integer('discount');
             $table->timestamps();
         });
     }
